@@ -2,7 +2,6 @@ package gpg
 
 import (
 	"errors"
-	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -10,6 +9,8 @@ import (
 	"runtime"
 	"sort"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
 )
 
 /*
@@ -50,7 +51,7 @@ type Key struct {
 }
 
 var pathToGPG string
-var keyring string // fixme: global state is bad but it's 2am, sorry
+var keyring string    // fixme: global state is bad but it's 2am, sorry
 var passphrase string // fixme: global state is bad but I just copied this ^^^
 
 func gpg() string {
@@ -74,7 +75,7 @@ func gpgCommand(command ...string) []string {
 	if passphrase != "" {
 		args = append(args, "--batch", "--pinentry=loopback", "--passphrase", passphrase)
 	}
-	return append(args, command...);
+	return append(args, command...)
 }
 
 // SetKeyring The keyring to source keys from
@@ -84,7 +85,7 @@ func SetKeyring(path string) {
 
 // SetPassphrase The passphrase to use for the signing key, disables pinentry
 func SetPassphrase(value string) {
-    passphrase = value
+	passphrase = value
 }
 
 // http://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=blob_plain;f=doc/DETAILS
@@ -270,7 +271,7 @@ func pipeThroughGPG(content []byte, args ...string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	
+
 	command := gpgCommand(args...)
 	if err := executeInShell(append(command, "-o", tmp.Name()+"E", tmp.Name())...); err != nil {
 		return nil, err

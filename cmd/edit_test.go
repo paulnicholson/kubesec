@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/shyiko/kubesec/gpg"
+	"kubesec/gpg"
 	"os"
 	"reflect"
 	"regexp"

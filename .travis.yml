@@ -3,6 +3,5 @@ services:
   - docker
 language: go
 go:
-  - 1.8
-install: make fetch
+  - 1.18
 script: docker run --rm -v $(pwd):/go/src/github.com/shyiko/kubesec:ro -w /go/src/github.com/shyiko/kubesec shyiko/kubesec-ci:latest /bin/bash -c "make test"

@@ -1,11 +1,12 @@
 package kms
 
 import (
-	log "github.com/sirupsen/logrus"
+	"strings"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/kms"
-	"strings"
+	log "github.com/sirupsen/logrus"
 )
 
 type KMSClient struct {

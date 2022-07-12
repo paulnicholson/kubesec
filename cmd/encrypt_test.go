@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/shyiko/kubesec/gpg"
+	"kubesec/gpg"
 	"reflect"
 	"regexp"
 	"sort"
@@ -92,11 +92,11 @@ func TestEncryptKeyAdd(t *testing.T) {
 	sort.Strings(fps)
 	expected := "data:\n  key: ANYTHING\nkind: Secret\n" + strings.Join([]string{
 		"# kubesec:v:3",
-		"# kubesec:pgp:" + fps[0] + ":ANYTHING",
 		"# kubesec:pgp:" + fps[1] + ":ANYTHING",
+		"# kubesec:pgp:" + fps[0] + ":ANYTHING",
 		"# kubesec:mac:ANYTHING",
 	}, "\n") + "\n"
-	if !regexp.MustCompile(strings.Replace(regexp.QuoteMeta(expected), "ANYTHING", "[^\\n]*", -1)).
+	if !regexp.MustCompile(strings.Replace(regexp.QuoteMeta(expected), "ANYTHING", "[^\n]*", -1)).
 		MatchString(string(actual)) {
 		t.Fatalf("actual: %#v != expected: %#v", string(actual), expected)
 	}
